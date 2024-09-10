@@ -1,0 +1,11 @@
+.board {
+  display: flex;
+  flex-wrap: wrap;
+  width: 300px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.game {
+  margin-top: 3rem;
+}

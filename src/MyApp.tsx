@@ -1,5 +1,8 @@
 import MyButton from './MyButton.tsx'
-import { useState, useEffect, useReducer } from 'react'
+import Board from './Board.tsx'
+import "./Board.css"
+import RefBoard from './reference-tic-tac-toe/Board.tsx'
+import { useState, useEffect, useReducer, useRef } from 'react'
 import "./App.css"
 
 
@@ -21,15 +24,7 @@ function reducer(state: number, action: string) {
 
 export default function MyApp() {
   const [count, setCount] = useState(0);
-  useEffect(() => {
-    console.log(count);
-  }, [count]);
-
   const [state, dispatch] = useReducer(reducer, 0);
-
-  function handleClick() {
-    setCount((count) => count + 1);
-  }
 
   const products: Array<Product> = [
     { title: 'Cabbage', id: 1 },
@@ -54,7 +49,12 @@ export default function MyApp() {
         <MyButton count={count} name="Decrement" onClick={() => dispatch("decrement")} />
       </div>
       <ul>{(isRenderMyApp && listItems)}</ul>
-      <div></div>
+      <div className="game">
+        <Board />
+      </div>
+      <div className="game">
+        <RefBoard />
+      </div>
     </>
   )
 }
