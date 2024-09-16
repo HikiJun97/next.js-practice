@@ -8,7 +8,7 @@ interface TicTacToeSquareProps {
 
 const TicTacToeSquare = forwardRef<HTMLDivElement, TicTacToeSquareProps>(({ onClick }: TicTacToeSquareProps, ref) => {
   return (
-    <div className="square" onClick={onClick} ref={ref}>
+    <div className="tic-tac-toe-square" onClick={onClick} ref={ref}>
     </div>
   );
 });

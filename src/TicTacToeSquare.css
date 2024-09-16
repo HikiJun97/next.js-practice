@@ -1,4 +1,4 @@
-.square {
+.tic-tac-toe-square {
   /* style for the black outline square */
   display: flex;
   justify-content: center;

@@ -1,0 +1,23 @@
+.square {
+  /* style for the black outline square */
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
+  background: #fff;
+  border: 1px solid #999;
+  /*float: left;*/
+  /*font-size: 1.5rem;*/
+  color: #000;
+  font-weight: bold;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  /* line-height: 34px; */
+  box-sizing: border-box;
+  /*width: calc(100% / var(--length));*/
+  /*padding-bottom: calc(100% / var(--length));*/
+  /*padding-bottom: 100%;*/
+  aspect-ratio: 1 / 1;
+  user-select: none;
+}

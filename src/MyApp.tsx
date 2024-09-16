@@ -1,7 +1,7 @@
 import MyButton from './MyButton.tsx'
 import Board from './Board.tsx'
 import "./Board.css"
-import RefBoard from './reference-tic-tac-toe/Board.tsx'
+import RefBoard from './Reference/Board.tsx'
 import { useState, useEffect, useReducer, useRef } from 'react'
 import "./App.css"
 
@@ -11,20 +11,22 @@ type Product = {
   id: number;
 };
 
-function reducer(state: number, action: string) {
+function reducer(count: number, action: string) {
   switch (action) {
     case 'increment':
-      return state + 1;
+      return count + 1;
     case 'decrement':
-      return state - 1;
+      if (count === 1) {
+        return count;
+      }
+      return count - 1;
     default:
-      return state;
+      return count;
   }
 }
 
 export default function MyApp() {
-  const [count, setCount] = useState(0);
-  const [state, dispatch] = useReducer(reducer, 0);
+  const [count, dispatch] = useReducer(reducer, 1);
 
   const products: Array<Product> = [
     { title: 'Cabbage', id: 1 },
@@ -53,7 +55,7 @@ export default function MyApp() {
         <Board />
       </div>
       <div className="game">
-        <RefBoard />
+        <RefBoard boardSize={count} />
       </div>
     </>
   )

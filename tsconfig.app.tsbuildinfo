@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/Board.tsx","./src/MyApp.tsx","./src/MyButton.tsx","./src/TicTacToeSquare.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/ReferenceTicTacToe/Board.tsx","./src/ReferenceTicTacToe/Square.tsx","./src/ReferenceTicTacToe/utils.ts","./src/reference-tic-tac-toe/Board.tsx","./src/reference-tic-tac-toe/Square.tsx"],"version":"5.6.2"}
