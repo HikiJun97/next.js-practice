@@ -7,20 +7,15 @@ import "./Board.css"
 type Squares = Array<'X' | 'O' | ''>;
 
 interface BoardProps {
-  boardSize: number;
+  xIsNext: boolean;
+  squares: Squares;
+  onPlay: (squares: Squares) => void;
+  boardSize?: number;
 }
 
-const Board: React.FC<BoardProps> = ({ boardSize }) => {
+const Board: React.FC<BoardProps> = ({ xIsNext, squares, onPlay, boardSize = 3 }) => {
   const initSquares: Squares = Array(boardSize ** 2).fill('');
-  const [squares, setSquares] = useState<Squares>(initSquares);
   const [history, setHistory] = useState<Array<Squares>>([initSquares]);
-  const [xIsNext, setXIsNext] = useState<boolean>(true);
-
-  useEffect(() => {
-    setSquares(initSquares);
-    setHistory([initSquares]);
-    setXIsNext(true);
-  }, [boardSize]);
 
   function handleClick(i: number) {
     if (squares[i] || caculateWinner(squares, boardSize)) {
@@ -36,14 +31,7 @@ const Board: React.FC<BoardProps> = ({ boardSize }) => {
     } else {
       nextSquares[i] = 'O';
     }
-    setXIsNext(!xIsNext);
-    setSquares(nextSquares);
-    setHistory([...history.slice(0, getClicked(squares)), nextSquares]);
-  }
-
-  function handleHistory(index: number) {
-    const historyCopy = history[index];
-    setSquares(historyCopy);
+    onPlay(nextSquares);
   }
 
   const winner: 'X' | 'O' | '' = caculateWinner(squares, boardSize);
@@ -56,36 +44,19 @@ const Board: React.FC<BoardProps> = ({ boardSize }) => {
     status = 'Next player: ' + (xIsNext ? 'X' : 'O');
   }
 
-  // style={{ alignContent: "center", width: "fit-content", paddingLeft: "0.2rem" }}
-
   return (
     <>
-      <div className="board-info">
+      <div className="status">
         <b>{status}</b>
-        <button onClick={() => {
-          setSquares(initSquares)
-          setHistory([initSquares])
-        }}>Restart</button>
       </div>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        <div className="board">
-          {[...Array(boardSize)].map((_, i) => (
-            <div className="board-row">
-              {[...Array(boardSize)].map((_, j) => (
-                <Square value={squares[boardSize * i + j]} length={boardSize} onSquareClick={squares[boardSize * i + j] ? () => { } : () => handleClick(boardSize * i + j)} />
-              ))}
-            </div>
-          ))}
-        </div>
-        <div className="history-board">
-          {history.map((squares, index) => {
-            if (index === 0) {
-              return <button onClick={() => { handleHistory(index) }}>Go to start</button>
-            } else {
-              return <button onClick={() => { handleHistory(index) }}>Go to #{index} move</button>
-            }
-          })}
-        </div>
+        {[...Array(boardSize)].map((_, i) => (
+          <div className="board-row">
+            {[...Array(boardSize)].map((_, j) => (
+              <Square value={squares[boardSize * i + j]} length={boardSize} onSquareClick={squares[boardSize * i + j] ? () => { } : () => handleClick(boardSize * i + j)} />
+            ))}
+          </div>
+        ))}
       </div>
     </>
   )
@@ -93,13 +64,45 @@ const Board: React.FC<BoardProps> = ({ boardSize }) => {
 
 
 const Game: React.FC = () => {
+  const [history, setHistory] = useState<Array<Squares>>([Array(9).fill('')]);
+  const [currentMove, setCurrentMove] = useState<number>(0);
+  const xIsNext = currentMove % 2 === 0;
+  const currentSquares = history[currentMove];
+
+  function handlePlay(nextSquares: Squares) {
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length - 1);
+  }
+
+  function jumpTo(nextMove: number) {
+    setCurrentMove(nextMove);
+  }
+
+  const moves = history.map((squares, move) => {
+    let description;
+    if (move > 0) {
+      description = 'Go to move #' + move;
+    } else {
+      description = 'Go to game start';
+    }
+    return (
+      <li key={move}>
+        <button onClick={() => jumpTo(move)}>{description}</button>
+      </li>
+    );
+  });
+
   return (
     <div className="game">
-
-      <Board boardSize={3} />
+      <div className="game-board">
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+      </div>
+      <div className="game-info">
+        <ol>{moves}</ol>
+      </div>
     </div>
   )
 }
 
-
-export default Board;
+export default Game;

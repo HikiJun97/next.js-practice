@@ -1,7 +1,8 @@
 import MyButton from './MyButton.tsx'
-import Board from './Board.tsx'
-import "./Board.css"
+import MyBoard from './MyTicTacToe/Board.tsx'
+//import "./Board.css"
 import RefBoard from './Reference/Board.tsx'
+import Game from './Reference2/Board.tsx'
 import { useState, useEffect, useReducer, useRef } from 'react'
 import "./App.css"
 
@@ -52,10 +53,13 @@ export default function MyApp() {
       </div>
       <ul>{(isRenderMyApp && listItems)}</ul>
       <div className="game">
-        <Board />
+        <MyBoard />
       </div>
       <div className="game">
         <RefBoard boardSize={count} />
+      </div>
+      <div className="game">
+        <Game />
       </div>
     </>
   )

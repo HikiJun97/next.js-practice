@@ -1,6 +1,4 @@
-import React from 'react';
-import TicTacToeSquare from './TicTacToeSquare.tsx'
-import "./Board.css"
+import React from 'react'; import TicTacToeSquare from './TicTacToeSquare.tsx'
 import { useState, useEffect, useReducer, useRef } from 'react'
 
 type Player = 'X' | 'O';
@@ -68,7 +66,7 @@ const Board: React.FC = () => {
       <div>Winner: {winner}</div>
       <div className="board">
         {[...Array(9)].map((_, i) => {
-          return <TicTacToeSquare ref={square_list[i]} onClick={winner ? () => { } : () => clickMark(i)} />
+          return <TicTacToeSquare key={i} ref={square_list[i]} onClick={winner ? () => { } : () => clickMark(i)} />
         })}
       </div>
       <button onClick={restart}>Restart</button>
