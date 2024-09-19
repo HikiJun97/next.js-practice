@@ -10,6 +10,7 @@ const Game: React.FC<GameProps> = ({ boardSize = 3 }) => {
   const initSquares: Squares = Array(boardSize ** 2).fill('');
   const [history, setHistory] = useState<Array<Squares>>([initSquares]);
   const [currentMove, setCurrentMove] = useState<number>(0);
+  const [isAscending, setIsAscending] = useState<boolean>(true);
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
@@ -58,7 +59,11 @@ const Game: React.FC<GameProps> = ({ boardSize = 3 }) => {
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} boardSize={boardSize} />
       </div>
       <div className="game-info">
-        <ol>{moves}</ol>
+        <div className="sort-buttons">
+          <button onClick={() => setIsAscending(true)}>Ascending</button>
+          <button onClick={() => setIsAscending(false)}>Descending</button>
+        </div>
+        <ol>{isAscending ? moves : [...moves].reverse()}</ol>
       </div>
     </div>
   )
