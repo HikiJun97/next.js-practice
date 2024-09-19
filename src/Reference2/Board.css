@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 300px;
+  width: 500px;
   align-content: flex-start;
   margin-top: 1px;
   /*margin-top: 1rem;*/
@@ -23,13 +23,34 @@
   width: 100%;
 }
 
-.game {
+.my-game {
   margin-top: 3rem;
 }
 
-.history-board {
+.status {
+  display: block;
+  text-align: left;
+}
+
+.game {
   display: flex;
-  width: 10rem;
+  flex-wrap: wrap;
+}
+
+.game-info {
+  display: flex;
+  width: 20rem;
   flex-direction: column;
   margin-left: 1rem;
 }
+
+/*.game-board {*/
+/*  display: flex;*/
+/*  flex-direction: row;*/
+/*  flex-wrap: wrap;*/
+/*  width: 1000px;*/
+/*  align-content: flex-start;*/
+/*  margin-top: 1px;*/
+/*  /*margin-top: 1rem;*/
+/*  /*margin-bottom: 1rem;*/
+/*}*/

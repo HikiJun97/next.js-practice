@@ -1,4 +1,6 @@
-export function caculateWinner(squares: Array<'X' | 'O' | ''>, length: number): 'X' | 'O' | '' {
+import type { Player, Squares } from '@/types/types';
+
+export function caculateWinner(squares: Squares, length: number): Player {
   const lines: Array<Array<number>> = makeLines(length);
 
   for (const line of lines) {
@@ -34,7 +36,7 @@ function makeLines(length: number): Array<Array<number>> {
   return lines
 }
 
-export function getClicked(squares: Array<'X' | 'O' | ''>): number {
+export function getClicked(squares: Squares): number {
   return squares.reduce((prev, curr) => {
     return curr ? prev + 1 : prev;
   }, 0);

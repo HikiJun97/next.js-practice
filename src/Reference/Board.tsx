@@ -70,9 +70,9 @@ const Board: React.FC<BoardProps> = ({ boardSize }) => {
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         <div className="board">
           {[...Array(boardSize)].map((_, i) => (
-            <div className="board-row">
+            <div key={i} className="board-row">
               {[...Array(boardSize)].map((_, j) => (
-                <Square value={squares[boardSize * i + j]} length={boardSize} onSquareClick={squares[boardSize * i + j] ? () => { } : () => handleClick(boardSize * i + j)} />
+                <Square key={boardSize * i + j} value={squares[boardSize * i + j]} length={boardSize} onSquareClick={squares[boardSize * i + j] ? () => { } : () => handleClick(boardSize * i + j)} />
               ))}
             </div>
           ))}
@@ -80,9 +80,9 @@ const Board: React.FC<BoardProps> = ({ boardSize }) => {
         <div className="history-board">
           {history.map((squares, index) => {
             if (index === 0) {
-              return <button onClick={() => { handleHistory(index) }}>Go to start</button>
+              return <button key={index} onClick={() => { handleHistory(index) }}>Go to start</button>
             } else {
-              return <button onClick={() => { handleHistory(index) }}>Go to #{index} move</button>
+              return <button key={index} onClick={() => { handleHistory(index) }}>Go to #{index} move</button>
             }
           })}
         </div>

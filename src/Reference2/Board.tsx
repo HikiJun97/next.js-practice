@@ -1,21 +1,22 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
 import Square from './Square'
-import { caculateWinner, getClicked } from './utils.ts'
+import { caculateWinner } from './utils.ts'
+import type { Player, Squares } from 'types/types.d.ts'
 import "./Board.css"
 
-type Squares = Array<'X' | 'O' | ''>;
+const X: Player = 'X';
+const O: Player = 'O';
+const players: Array<Player> = [X, O];
 
 interface BoardProps {
   xIsNext: boolean;
   squares: Squares;
   onPlay: (squares: Squares) => void;
-  boardSize?: number;
+  boardSize: number;
 }
 
-const Board: React.FC<BoardProps> = ({ xIsNext, squares, onPlay, boardSize = 3 }) => {
-  const initSquares: Squares = Array(boardSize ** 2).fill('');
-  const [history, setHistory] = useState<Array<Squares>>([initSquares]);
+
+const Board: React.FC<BoardProps> = ({ xIsNext, squares, onPlay, boardSize }) => {
 
   function handleClick(i: number) {
     if (squares[i] || caculateWinner(squares, boardSize)) {
@@ -27,21 +28,23 @@ const Board: React.FC<BoardProps> = ({ xIsNext, squares, onPlay, boardSize = 3 }
     // const nextSquares = Array.from(squares);
     // const nextSquares = squares.map(x => x);
     if (xIsNext) {
-      nextSquares[i] = 'X';
+      nextSquares[i] = players[0];
     } else {
-      nextSquares[i] = 'O';
+      nextSquares[i] = players[1];
     }
     onPlay(nextSquares);
   }
 
-  const winner: 'X' | 'O' | '' = caculateWinner(squares, boardSize);
+  const winner: Player = caculateWinner(squares, boardSize);
   let status: string;
   if (winner) {
     status = 'Winner: ' + winner;
-  } else if (squares.every(mark => ['X', 'O'].includes(mark))) {
+  } else if (squares.every(mark => {
+    players.includes(mark)
+  })) {
     status = 'Tie';
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    status = 'Next player: ' + (xIsNext ? players[0] : players[1]);
   }
 
   return (
@@ -49,11 +52,11 @@ const Board: React.FC<BoardProps> = ({ xIsNext, squares, onPlay, boardSize = 3 }
       <div className="status">
         <b>{status}</b>
       </div>
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+      <div className="board">
         {[...Array(boardSize)].map((_, i) => (
-          <div className="board-row">
+          <div key={i} className="board-row">
             {[...Array(boardSize)].map((_, j) => (
-              <Square value={squares[boardSize * i + j]} length={boardSize} onSquareClick={squares[boardSize * i + j] ? () => { } : () => handleClick(boardSize * i + j)} />
+              <Square key={boardSize * i + j} value={squares[boardSize * i + j]} length={boardSize} onSquareClick={squares[boardSize * i + j] ? () => { } : () => handleClick(boardSize * i + j)} />
             ))}
           </div>
         ))}
@@ -62,47 +65,4 @@ const Board: React.FC<BoardProps> = ({ xIsNext, squares, onPlay, boardSize = 3 }
   )
 }
 
-
-const Game: React.FC = () => {
-  const [history, setHistory] = useState<Array<Squares>>([Array(9).fill('')]);
-  const [currentMove, setCurrentMove] = useState<number>(0);
-  const xIsNext = currentMove % 2 === 0;
-  const currentSquares = history[currentMove];
-
-  function handlePlay(nextSquares: Squares) {
-    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
-    setHistory(nextHistory);
-    setCurrentMove(nextHistory.length - 1);
-  }
-
-  function jumpTo(nextMove: number) {
-    setCurrentMove(nextMove);
-  }
-
-  const moves = history.map((squares, move) => {
-    let description;
-    if (move > 0) {
-      description = 'Go to move #' + move;
-    } else {
-      description = 'Go to game start';
-    }
-    return (
-      <li key={move}>
-        <button onClick={() => jumpTo(move)}>{description}</button>
-      </li>
-    );
-  });
-
-  return (
-    <div className="game">
-      <div className="game-board">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
-      </div>
-      <div className="game-info">
-        <ol>{moves}</ol>
-      </div>
-    </div>
-  )
-}
-
-export default Game;
+export default Board;
