@@ -30,16 +30,26 @@ const Game: React.FC<GameProps> = ({ boardSize = 3 }) => {
 
   const moves = history.map((_, move) => {
     let description;
-    if (move > 0) {
+    if (move === currentMove) {
+      description = `You are at move #${move}`;
+    } else if (move > 0) {
       description = 'Go to move #' + move;
     } else {
       description = 'Go to game start';
     }
-    return (
-      <li key={move}>
-        <button key={move} onClick={() => jumpTo(move)}>{description}</button>
-      </li>
-    );
+    if (move === currentMove) {
+      return (
+        <li key={move}>
+          <span>{description}</span>
+        </li>
+      );
+    } else {
+      return (
+        <li key={move}>
+          <button key={move} onClick={() => jumpTo(move)}>{description}</button>
+        </li>
+      );
+    }
   });
 
   return (
