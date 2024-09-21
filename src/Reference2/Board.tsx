@@ -8,7 +8,7 @@ import "./Board.css"
 interface BoardProps {
   xIsNext: boolean;
   squares: Squares;
-  onPlay: (squares: Squares) => void;
+  onPlay: (squares: Squares, move: number) => void;
   boardSize: number;
 }
 
@@ -31,7 +31,7 @@ const Board: React.FC<BoardProps> = ({ xIsNext, squares, onPlay, boardSize }) =>
     } else {
       nextSquares[i] = players[1];
     }
-    onPlay(nextSquares);
+    onPlay(nextSquares, i);
   }
 
   //const [winner, bingoLine]: [Player, Array<number>] = caculateWinner(squares, boardSize);

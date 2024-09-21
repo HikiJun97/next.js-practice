@@ -8,14 +8,14 @@ interface GameProps {
 
 const Game: React.FC<GameProps> = ({ boardSize = 3 }) => {
   const initSquares: Squares = Array(boardSize ** 2).fill('');
-  const [history, setHistory] = useState<Array<Squares>>([initSquares]);
+  const [history, setHistory] = useState<Array<[Squares, number]>>([[initSquares, -1]]);
   const [currentMove, setCurrentMove] = useState<number>(0);
   const [isAscending, setIsAscending] = useState<boolean>(true);
   const xIsNext = currentMove % 2 === 0;
-  const currentSquares = history[currentMove];
+  const currentSquares = history[currentMove][0];
 
-  function handlePlay(nextSquares: Squares) {
-    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+  function handlePlay(nextSquares: Squares, nextMove: number) {
+    const nextHistory: Array<[Squares, number]> = [...history.slice(0, currentMove + 1), [nextSquares, nextMove]];
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
   }
@@ -25,16 +25,22 @@ const Game: React.FC<GameProps> = ({ boardSize = 3 }) => {
   }
 
   useEffect(() => {
-    setHistory([initSquares]);
+    setHistory([[initSquares, -1]]);
     setCurrentMove(0);
   }, [boardSize]);
 
-  const moves = history.map((_, move) => {
+  const moves = history.map((log, move) => {
+    const coordinate = log[1];
+    let col, row;
+    if (coordinate >= 0) {
+      col = coordinate % boardSize + 1;
+      row = Math.floor(coordinate / boardSize) + 1;
+    }
     let description;
     if (move === currentMove) {
-      description = `You are at move #${move}`;
+      description = `You are at move #${move} ${coordinate >= 0 ? `(${row}, ${col})` : ''}`;
     } else if (move > 0) {
-      description = 'Go to move #' + move;
+      description = `Go to move #${move}  ${coordinate >= 0 ? `(${row}, ${col})` : ''}`;
     } else {
       description = 'Go to game start';
     }
