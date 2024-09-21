@@ -1,2 +1,2 @@
-export type Player = 'X' | 'O' | '';
+export type Player = string | null;
 export type Squares = Array<Player>;

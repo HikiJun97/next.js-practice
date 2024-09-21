@@ -1,12 +1,9 @@
 import React from 'react'
 import Square from './Square'
-import { caculateWinner } from './utils.ts'
-import type { Player, Squares } from 'types/types.d.ts'
+import { getWinner, getBingoLine } from './utils'
+import type { Player, Squares } from 'types/types'
+import players from './players'
 import "./Board.css"
-
-const X: Player = 'X';
-const O: Player = 'O';
-const players: Array<Player> = [X, O];
 
 interface BoardProps {
   xIsNext: boolean;
@@ -17,9 +14,11 @@ interface BoardProps {
 
 
 const Board: React.FC<BoardProps> = ({ xIsNext, squares, onPlay, boardSize }) => {
+  const winner: Player = getWinner(squares, boardSize);
+  const bingoLine: Array<number> | null = getBingoLine(squares, boardSize);
 
-  function handleClick(i: number) {
-    if (squares[i] || caculateWinner(squares, boardSize)) {
+  function handleClick(i: number, winner: Player) {
+    if (squares[i] || winner !== null) {
       return;
     }
 
@@ -35,7 +34,7 @@ const Board: React.FC<BoardProps> = ({ xIsNext, squares, onPlay, boardSize }) =>
     onPlay(nextSquares);
   }
 
-  const winner: Player = caculateWinner(squares, boardSize);
+  //const [winner, bingoLine]: [Player, Array<number>] = caculateWinner(squares, boardSize);
   let status: string;
   if (winner) {
     status = 'Winner: ' + winner;
@@ -55,9 +54,10 @@ const Board: React.FC<BoardProps> = ({ xIsNext, squares, onPlay, boardSize }) =>
       <div className="board">
         {[...Array(boardSize)].map((_, i) => (
           <div key={i} className="board-row">
-            {[...Array(boardSize)].map((_, j) => (
-              <Square key={boardSize * i + j} value={squares[boardSize * i + j]} length={boardSize} onSquareClick={squares[boardSize * i + j] ? () => { } : () => handleClick(boardSize * i + j)} />
-            ))}
+            {[...Array(boardSize)].map((_, j) => {
+              const index = boardSize * i + j;
+              return <Square key={index} value={squares[index]} length={boardSize} onSquareClick={squares[index] ? () => { } : () => handleClick(index, winner)} isBingo={bingoLine ? bingoLine.includes(index) : false} />
+            })}
           </div>
         ))}
       </div>
