@@ -1,8 +1,9 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import Square from './Square'
-import { caculateWinner, getClicked } from './utils.ts'
-import "./Board.css"
+import { getWinner, getClicked } from '@/utils/utils'
+import type { Player } from '@/types/types';
+import "@/styles/Reference/Board.css"
 
 type Squares = Array<'X' | 'O' | ''>;
 
@@ -23,7 +24,7 @@ const Board: React.FC<BoardProps> = ({ boardSize }) => {
   }, [boardSize]);
 
   function handleClick(i: number) {
-    if (squares[i] || caculateWinner(squares, boardSize)) {
+    if (squares[i] || getWinner(squares, boardSize)) {
       return;
     }
 
@@ -46,7 +47,7 @@ const Board: React.FC<BoardProps> = ({ boardSize }) => {
     setSquares(historyCopy);
   }
 
-  const winner: 'X' | 'O' | '' = caculateWinner(squares, boardSize);
+  const winner: Player = getWinner(squares, boardSize);
   let status: string;
   if (winner) {
     status = 'Winner: ' + winner;
@@ -78,7 +79,7 @@ const Board: React.FC<BoardProps> = ({ boardSize }) => {
           ))}
         </div>
         <div className="history-board">
-          {history.map((squares, index) => {
+          {history.map((_, index) => {
             if (index === 0) {
               return <button key={index} onClick={() => { handleHistory(index) }}>Go to start</button>
             } else {

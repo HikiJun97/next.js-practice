@@ -1,5 +1,6 @@
-import React from 'react'; import TicTacToeSquare from './TicTacToeSquare.tsx'
-import { useState, useEffect, useReducer, useRef } from 'react'
+import React from 'react'
+import TicTacToeSquare from './TicTacToeSquare.tsx'
+import { useState, useEffect, useRef } from 'react'
 
 type Player = 'X' | 'O';
 

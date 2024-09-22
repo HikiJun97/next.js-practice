@@ -1,19 +1,28 @@
-export function caculateWinner(squares: Array<'X' | 'O' | ''>, length: number): 'X' | 'O' | '' {
-  const lines: Array<Array<number>> = makeLines(length);
+import type { Player, Squares } from '@/types/types';
 
-  for (const line of lines) {
-    const isWinner: boolean = line.reduce((prev, curr) => {
+export function getWinner(squares: Squares, length: number): Player {
+  const bingoLine: Array<number> | null = getBingoLine(squares, length);
+  if (bingoLine) {
+    return squares[bingoLine[0]];
+  }
+  return null;
+}
+
+export function getBingoLine(squares: Squares, length: number): Array<number> | null {
+  const bingoLines: Array<Array<number>> = makeLines(length);
+
+  for (const bingoLine of bingoLines) {
+    const isWinner: boolean = bingoLine.reduce((prev, curr) => {
       if (squares[prev] && squares[prev] === squares[curr]) {
         return curr;
       }
       return -1;
     }) === -1 ? false : true;
-    if (isWinner && ['X', 'O'].includes(squares[line[0]])) {
-      console.log("winner winner chicken dinner");
-      return squares[line[0]];
+    if (isWinner) {
+      return bingoLine;
     }
   }
-  return '';
+  return null;
 }
 
 function makeLines(length: number): Array<Array<number>> {
@@ -34,7 +43,7 @@ function makeLines(length: number): Array<Array<number>> {
   return lines
 }
 
-export function getClicked(squares: Array<'X' | 'O' | ''>): number {
+export function getClicked(squares: Squares): number {
   return squares.reduce((prev, curr) => {
     return curr ? prev + 1 : prev;
   }, 0);

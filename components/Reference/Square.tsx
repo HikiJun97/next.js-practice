@@ -1,5 +1,5 @@
 import React from 'react'
-import "./Square.css"
+import "@/styles/Reference/Square.css"
 
 interface SquareProps {
   value: string | null;

@@ -1,10 +1,12 @@
+'use client'
+
 import MyButton from './MyButton'
 import MyBoard from './MyTicTacToe/Board'
 //import "./Board.css"
 import RefBoard from './Reference/Board'
 import Game from './Reference2/Game'
 import { useReducer } from 'react'
-import "./App.css"
+import "@/styles/App.css"
 
 type Product = {
   title: string;

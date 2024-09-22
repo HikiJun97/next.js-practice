@@ -1,6 +1,6 @@
 import React from 'react';
 import { forwardRef } from 'react';
-import './TicTacToeSquare.css';
+import '@/styles/MyTicTacToe/TicTacToeSquare.css';
 
 interface TicTacToeSquareProps {
   onClick: () => void;

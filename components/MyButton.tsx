@@ -1,4 +1,4 @@
-import './MyButton.css'
+import '@/styles/MyButton.css'
 
 // Declare type of count and onClick above
 type MyButtonProps = {
