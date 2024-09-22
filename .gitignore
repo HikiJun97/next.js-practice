@@ -9,7 +9,7 @@ lerna-debug.log*
 
 /node_modules
 /.pnp
-.pnp.js
+.pnp*
 .yarn/install-state.gz
 
 # testing

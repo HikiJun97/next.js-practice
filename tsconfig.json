@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "compilerOptions": {
     "target": "ES2023",
     "useDefineForClassFields": true,
@@ -45,11 +44,5 @@
   ],
   "exclude": [
     "./node_modules"
-=======
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
->>>>>>> parent of d906780 (build: migrate to Next.js from Vite)
   ]
 }
