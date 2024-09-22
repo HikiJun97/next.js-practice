@@ -1,14 +1,12 @@
 import './MyButton.css'
 
-
 // Declare type of count and onClick above
 type MyButtonProps = {
-  count: number;
   name: string;
   onClick: () => void;
 }
 
-export default function MyButton({ count, name, onClick }: MyButtonProps) {
+export default function MyButton({ name, onClick }: MyButtonProps) {
   return (
     <button className="my-button" onClick={onClick}>
       {name}
