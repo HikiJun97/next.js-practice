@@ -47,10 +47,10 @@ export default function MyApp() {
     <>
       <h1>{count}</h1>
       <div>
-        <MyButton name="Increment" onClick={() => dispatch("increment")} />
+        <MyButton count={count} name="Increment" onClick={() => dispatch("increment")} />
       </div>
       <div>
-        <MyButton name="Decrement" onClick={() => dispatch("decrement")} />
+        <MyButton count={count} name="Decrement" onClick={() => dispatch("decrement")} />
       </div>
       <ul>{(isRenderMyApp && listItems)}</ul>
       <div className="my-game">
