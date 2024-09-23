@@ -48,12 +48,12 @@ const Board: React.FC<BoardProps> = ({ xIsNext, squares, onPlay, boardSize }) =>
 
   return (
     <>
-      <div className="status">
+      <div className="block text-left">
         <b>{status}</b>
       </div>
-      <div className="board">
+      <div className="flex flex-row flex-wrap w-[500px] content-start mt-[1px]">
         {[...Array(boardSize)].map((_, i) => (
-          <div key={i} className="board-row">
+          <div key={i} className="flex flex-wrap w-[100%]">
             {[...Array(boardSize)].map((_, j) => {
               const index = boardSize * i + j;
               return <Square key={index} value={squares[index]} length={boardSize} onSquareClick={squares[index] ? () => { } : () => handleClick(index, winner)} isBingo={bingoLine ? bingoLine.includes(index) : false} />

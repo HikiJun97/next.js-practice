@@ -1,4 +1,5 @@
-import Board from './Board';
+import Board from './Board'
+import { Button } from '@chakra-ui/react'
 import { useState, useEffect } from 'react'
 import type { Squares } from '@/types/types.d.ts';
 
@@ -47,27 +48,27 @@ const Game: React.FC<GameProps> = ({ boardSize = 3 }) => {
     if (move === currentMove) {
       return (
         <li key={move}>
-          <span>{description}</span>
+          <Button className="w-52 my-1 disabled">{description}</Button>
         </li>
       );
     } else {
       return (
         <li key={move}>
-          <button key={move} onClick={() => jumpTo(move)}>{description}</button>
+          <Button className="w-52 my-1" key={move} onClick={() => jumpTo(move)}>{description}</Button>
         </li>
       );
     }
   });
 
   return (
-    <div className="game">
+    <div className="flex flex-wrap">
       <div className="game-board">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} boardSize={boardSize} />
       </div>
-      <div className="game-info">
+      <div className="flex flex-col ml-1">
         <div className="sort-buttons">
-          <button onClick={() => setIsAscending(true)}>Ascending</button>
-          <button onClick={() => setIsAscending(false)}>Descending</button>
+          <Button className="w-52 my-1" onClick={() => setIsAscending(true)}>Ascending</Button>
+          <Button className="w-52 my-1" onClick={() => setIsAscending(false)}>Descending</Button>
         </div>
         <ol>{isAscending ? moves : [...moves].reverse()}</ol>
       </div>

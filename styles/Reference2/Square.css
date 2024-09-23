@@ -1,23 +1,28 @@
-.square {
-  /* style for the black outline square */
-  /*display: flex;*/
-  /*justify-content: center;*/
-  /*align-items: center;*/
-  background: #fff;
-  border: 1px solid #999;
-  /*float: left;*/
-  /*font-size: 1.5rem;*/
-  color: #000;
-  font-weight: bold;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
-  text-align: center;
-  /* line-height: 34px; */
-  box-sizing: border-box;
-  /*width: calc(100% / var(--length));*/
-  /*padding-bottom: calc(100% / var(--length));*/
-  /*padding-bottom: 100%;*/
-  aspect-ratio: 1 / 1;
-  user-select: none;
-}
+/* .square { */
+/*   background: #fff; */
+/*   border: 1px solid #999; */
+/*   color: #000; */
+/*   font-weight: bold; */
+/*   margin-right: -1px; */
+/*   margin-top: -1px; */
+/*   padding: 0; */
+/*   text-align: center; */
+/*   box-sizing: border-box; */
+/*   aspect-ratio: 1 / 1; */
+/*   user-select: none; */
+/* } */
+
+/* .square { */
+/* @apply bg-white border border-gray-400 text-black font-bold mr-[-1px] mt-[-1px] p-0 text-center box-border aspect-[1/1] select-none; */
+/*   background: white; */
+/*   border: 1px solid #999; */
+/*   color: black; */
+/*   font-weight: bold; */
+/*   margin-right: -1px; */
+/*   margin-top: -1px; */
+/*   padding: 0; */
+/*   text-align: center; */
+/*   box-sizing: border-box; */
+/*   aspect-ratio: 1 / 1; */
+/*   user-select: none; */
+/* } */
