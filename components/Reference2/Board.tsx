@@ -1,6 +1,6 @@
 import React from 'react'
 import Square from './Square'
-import { getWinner, getBingoLine } from '@/utils/utils'
+import { getBingoLine } from '@/utils/utils'
 import type { Player, Squares } from '@/types/types'
 import players from './players'
 import "@/styles/Reference2/Board.css"
@@ -9,12 +9,12 @@ interface BoardProps {
   xIsNext: boolean;
   squares: Squares;
   onPlay: (squares: Squares, move: number) => void;
+  winner: Player;
   boardSize: number;
 }
 
 
-const Board: React.FC<BoardProps> = ({ xIsNext, squares, onPlay, boardSize }) => {
-  const winner: Player = getWinner(squares, boardSize);
+const Board: React.FC<BoardProps> = ({ xIsNext, squares, onPlay, winner, boardSize }) => {
   const bingoLine: Array<number> | null = getBingoLine(squares, boardSize);
 
   function handleClick(i: number, winner: Player) {
@@ -34,29 +34,16 @@ const Board: React.FC<BoardProps> = ({ xIsNext, squares, onPlay, boardSize }) =>
     onPlay(nextSquares, i);
   }
 
-  //const [winner, bingoLine]: [Player, Array<number>] = caculateWinner(squares, boardSize);
-  let status: string;
-  if (winner) {
-    status = 'Winner: ' + winner;
-  } else if (squares.every(mark => {
-    players.includes(mark)
-  })) {
-    status = 'Tie';
-  } else {
-    status = 'Next player: ' + (xIsNext ? players[0] : players[1]);
-  }
-
   return (
     <>
-      <div className="block text-left">
-        <b>{status}</b>
-      </div>
-      <div className="flex flex-row flex-wrap w-[500px] content-start mt-[1px]">
+      <div className="board">
         {[...Array(boardSize)].map((_, i) => (
-          <div key={i} className="flex flex-wrap w-[100%]">
+          <div key={i} className="board-row">
             {[...Array(boardSize)].map((_, j) => {
               const index = boardSize * i + j;
-              return <Square key={index} value={squares[index]} length={boardSize} onSquareClick={squares[index] ? () => { } : () => handleClick(index, winner)} isBingo={bingoLine ? bingoLine.includes(index) : false} />
+              return (
+                <Square key={index} value={squares[index]} length={boardSize} onSquareClick={() => handleClick(index, winner)} isBingo={bingoLine ? bingoLine.includes(index) : false} />
+              )
             })}
           </div>
         ))}

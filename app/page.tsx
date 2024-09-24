@@ -11,9 +11,7 @@ import MyApp from '@/components/MyApp'
 
 export default function Page() {
   return (
-    <>
-      <MyApp />
-    </>
+    <MyApp />
   )
   //return <ClientOnly />
 }

@@ -1,13 +1,12 @@
 'use client'
 
-import MyButton from './MyButton'
-import { Button } from '@chakra-ui/react'
+// import MyButton from './MyButton'
 // import MyBoard from './MyTicTacToe/Board'
 //import "./Board.css"
 // import RefBoard from './Reference/Board'
 import Game from './Reference2/Game'
 import { useReducer } from 'react'
-import "@/styles/App.css"
+import "@/styles/MyApp.css"
 
 type Product = {
   title: string;
@@ -43,30 +42,18 @@ export default function MyApp() {
     </li>
   );
 
-  const isRenderMyApp: boolean = true;
+  const isRenderMyApp: boolean = false;
   return (
-    <div className="flex flex-col flex-wrap items-center m-auto justify-center mt-20">
-      <h1>{count}</h1>
-      <div>
-        <MyButton name="Increment" onClick={() => dispatch("increment")} />
-        <MyButton name="Decrement" onClick={() => dispatch("decrement")} />
+    <div className="my-app">
+      <h3 className="number">{count}</h3>
+      <div className="flex flex-row flex-wrap">
+        <button className="number-button" onClick={() => dispatch("increment")}>Increment</button>
       </div>
       <div className="flex flex-row flex-wrap">
-        <Button colorScheme="blue" className="w-[10rem] py-2 px-4 text-base font-medium cursor-pointer transition-colors duration-300 my-1 block" onClick={() => dispatch("increment")}>Increment</Button>
-      </div>
-      <div className="flex flex-row flex-wrap">
-        <Button colorScheme="blue" className="w-[10rem] py-2 px-4 text-base font-medium cursor-pointer transition-colors duration-300 my-1 block" onClick={() => dispatch("decrement")}>Decrement</Button>
+        <button className="number-button" onClick={() => dispatch("decrement")}>Decrement</button>
       </div>
       <ul>{(isRenderMyApp && listItems)}</ul>
-      {/* <div className="my-game"> */}
-      {/*   <MyBoard /> */}
-      {/* </div> */}
-      {/* <div className="my-game"> */}
-      {/*   <RefBoard boardSize={count} /> */}
-      {/* </div> */}
-      <div className="game">
-        <Game boardSize={count} />
-      </div>
+      <Game boardSize={count} />
     </div>
   )
 }

@@ -1,0 +1,31 @@
+.game {
+  @apply flex flex-row flex-wrap justify-center m-auto my-16;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  /* margin-top: 3rem; */
+}
+
+.buttons-container {
+  @apply flex flex-col flex-nowrap;
+}
+
+.history {
+  @apply flex flex-col flex-nowrap justify-center items-center;
+}
+
+.sort-button {
+  @apply w-40 font-bold py-2 px-4 rounded mx-1 my-1 bg-gray-200;
+}
+
+.history-button {
+  @apply w-60 font-bold py-2 px-4 rounded mx-1 my-1 bg-gray-100;
+}
+
+.history-button:hover {
+  @apply w-60 font-bold py-2 px-4 rounded mx-1 my-1 bg-gray-200;
+}
+
+.history-button:disabled {
+  @apply w-60 font-bold py-2 px-4 rounded mx-1 my-1 bg-gray-500 text-white;
+}
+

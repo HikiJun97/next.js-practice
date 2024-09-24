@@ -75,21 +75,3 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-
-
-@layer components {
-  .square {
-    @apply bg-white border border-gray-500 text-black font-bold mr-[-1px] mt-[-1px] p-0 text-center box-border aspect-[1/1] select-none;
-    /* background: gray; */
-    /* border: 1px solid #999; */
-    /* color: black; */
-    /* font-weight: bold; */
-    /* margin-right: -1px; */
-    /* margin-top: -1px; */
-    /* padding: 0; */
-    /* text-align: center; */
-    /* box-sizing: border-box; */
-    /* aspect-ratio: 1 / 1; */
-    /* user-select: none; */
-  }
-}

@@ -1,5 +1,5 @@
 import React from 'react'
-// import "@/styles/Reference2/Square.css"
+ import "@/styles/Reference2/Square.css"
 
 interface SquareProps {
   value: string | null;
@@ -19,7 +19,8 @@ const Square: React.FC<SquareProps> = ({ value, length, onSquareClick, isBingo }
         backgroundColor: isBingo ? '#3498db' : 'white',
         transition: 'background-color 0.2s ease'
       }}
-      onClick={onSquareClick}>{value}
+      onClick={onSquareClick}>
+      {value}
     </button>
   )
 }

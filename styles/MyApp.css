@@ -43,3 +43,15 @@
 .read-the-docs {
   color: #888;
 }
+
+.my-app {
+  @apply flex flex-col flex-wrap items-center m-auto justify-center mt-20;
+}
+
+.number {
+  @apply ml-auto mr-auto mb-8 text-5xl font-bold;
+}
+
+.number-button {
+  @apply w-[10rem] py-2 px-4 text-base font-medium cursor-pointer transition-colors duration-300 my-1 block bg-sky-300;
+}

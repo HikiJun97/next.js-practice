@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Providers } from './providers';
 import { fonts } from './fonts';
-import "@/styles/globals.css";
+import "@/styles/globals-minify.css";
 
 export const metadata: Metadata = {
   title: "My Next App",
