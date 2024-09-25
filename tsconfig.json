@@ -36,6 +36,8 @@
     ]
   },
   "include": [
+    "./app/**/*.ts",
+    "./app/**/*.tsx",
     "./dist/types/**/*.ts",
     "./next-env.d.ts",
     "./**/*.ts",

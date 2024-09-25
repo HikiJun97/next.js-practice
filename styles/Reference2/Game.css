@@ -1,5 +1,5 @@
 .game {
-  @apply flex flex-row flex-wrap justify-center m-auto my-16;
+  @apply flex flex-row flex-wrap;
   /* display: flex; */
   /* flex-wrap: wrap; */
   /* margin-top: 3rem; */

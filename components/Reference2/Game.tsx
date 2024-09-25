@@ -33,12 +33,11 @@ const Game: React.FC<GameProps> = ({ boardSize = 3 }) => {
   const winner: Player = getWinner(currentSquares, boardSize);
 
   return (
-    <div className="game">
-      <div className="flex flex-col justify-center items-start self-center">
+    <div className="container w-full flex flex-wrap justify-around space-x-4 lg:space-x-0">
+      <div className="flex flex-col">
         <h3 className="block text-xl text-left font-bold">{getStatus(winner, xIsNext, currentSquares)}</h3>
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} winner={winner} boardSize={boardSize} />
       </div>
-      {/* <div className="flex flex-col ml-1"> */}
       <div className="buttons-container">
         <div className="sort-buttons flex flex-row flex-wrap">
           <Button className="sort-button" onClick={() => setIsAscending(true)}>Ascending</Button>
