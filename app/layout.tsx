@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Providers } from './providers';
 import { fonts } from './fonts';
 import "@/styles/globals-minify.css";
 
@@ -15,8 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <title>My Next App</title>
       </head>
       <body>
-        {/* <div id="root">{children}</div> */}
-        <Providers>{children}</Providers>
+        <div id="root">{children}</div>
       </body>
     </html>
   )
