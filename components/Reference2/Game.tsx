@@ -1,4 +1,5 @@
 import Board from './Board'
+import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react'
 import type { Player, Squares } from '@/types/types'
 import { getWinner } from '@/utils/utils'
@@ -40,8 +41,8 @@ const Game: React.FC<GameProps> = ({ boardSize = 3 }) => {
       {/* <div className="flex flex-col ml-1"> */}
       <div className="buttons-container">
         <div className="sort-buttons flex flex-row flex-wrap">
-          <button className="sort-button" onClick={() => setIsAscending(true)}>Ascending</button>
-          <button className="sort-button" onClick={() => setIsAscending(false)}>Descending</button>
+          <Button className="sort-button" onClick={() => setIsAscending(true)}>Ascending</Button>
+          <Button className="sort-button" onClick={() => setIsAscending(false)}>Descending</Button>
         </div>
         <ol className="history">{isAscending ? moves : [...moves].reverse()}</ol>
         {/* </div> */}
@@ -83,13 +84,13 @@ function getMoveLog(log: [Squares, number], move: number, boardSize: number, cur
   if (move === currentMove) {
     return (
       <li key={move}>
-        <button className="history-button" disabled>{description}</button>
+        <Button className="history-button" disabled>{description}</Button>
       </li>
     );
   } else {
     return (
       <li key={move}>
-        <button className="history-button" onClick={() => setCurrentMove(move)}>{description}</button>
+        <Button className="history-button" onClick={() => setCurrentMove(move)}>{description}</Button>
       </li>
     );
   }

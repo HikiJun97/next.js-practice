@@ -1,10 +1,7 @@
 'use client'
 
-// import MyButton from './MyButton'
-// import MyBoard from './MyTicTacToe/Board'
-//import "./Board.css"
-// import RefBoard from './Reference/Board'
 import Game from './Reference2/Game'
+import { Button } from '@/components/ui/button';
 import { useReducer } from 'react'
 import "@/styles/MyApp.css"
 
@@ -47,10 +44,10 @@ export default function MyApp() {
     <div className="my-app">
       <h3 className="number">{count}</h3>
       <div className="flex flex-row flex-wrap">
-        <button className="number-button" onClick={() => dispatch("increment")}>Increment</button>
+        <Button className="number-button" onClick={() => dispatch("increment")}>Increment</Button>
       </div>
       <div className="flex flex-row flex-wrap">
-        <button className="number-button" onClick={() => dispatch("decrement")}>Decrement</button>
+        <Button className="number-button" onClick={() => dispatch("decrement")}>Decrement</Button>
       </div>
       <ul>{(isRenderMyApp && listItems)}</ul>
       <Game boardSize={count} />

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ThemeProvider } from '@/components/theme-provider';
 import { fonts } from './fonts';
 import "@/styles/globals-minify.css";
 
@@ -14,7 +15,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <title>My Next App</title>
       </head>
       <body>
-        <div id="root">{children}</div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )
