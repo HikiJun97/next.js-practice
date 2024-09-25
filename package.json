@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "tailwindcss styles/globals.css -o styles/globals-minify.css --watch --minify & next dev",
-    "build": "tailwindcss styles/globals.css -o styles/globals-minify.css --watch --minify & next build",
+    "build": "tailwindcss styles/globals.css -o styles/globals-minify.css --watch && next build",
     "start": "next start",
     "lint": "next lint"
   },
